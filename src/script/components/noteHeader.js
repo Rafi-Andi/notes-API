@@ -77,7 +77,8 @@ class Header extends HTMLElement {
             <ul>
               <li class="home"><a href="index.html">Home</a></li>
               <li class="notes"><a href="notes.html">Notes</a></li>
-            </ul>
+              <li class="archived"><a href="archived.html">Archived</a></li>
+              </ul>
         </div>
         `;
   }

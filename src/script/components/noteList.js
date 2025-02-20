@@ -21,18 +21,19 @@ class NotesList extends HTMLElement {
          @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
         :host {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);            gap: 1rem;
+            grid-template-columns: repeat(3, minmax(0, 1fr));            
+            gap: 1rem;
             font-family: roboto, sans-serif;
         }
 
         @media (max-width : 680px) {
             :host {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
         @media (max-width : 480px) {
             :host {
-                grid-template-columns: repeat(1, 1fr);
+                grid-template-columns: repeat(1, minmax(0, 1fr));
             }
         }
         ` 

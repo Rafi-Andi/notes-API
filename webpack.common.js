@@ -35,6 +35,10 @@ module.exports = {
       template: path.join(__dirname, 'notes.html'),
       filename: 'notes.html',
     }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'archived.html'),
+      filename: 'archived.html',
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {

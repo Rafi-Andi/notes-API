@@ -15,8 +15,8 @@ class NoteItem extends HTMLElement {
     };
   }
 
-  connectedCallback(){
-    this.render()
+  connectedCallback() {
+    this.render();
   }
 
   setNote(values) {
@@ -26,7 +26,7 @@ class NoteItem extends HTMLElement {
     this._note["createdAt"] = values.createdAt;
     this._note["archived"] = values.archived;
 
-    this.render()
+    this.render();
   }
 
   updateStyle() {
@@ -46,7 +46,10 @@ class NoteItem extends HTMLElement {
             background-color: #373737;
             padding: 10px;
             border-radius: 10px;
-            
+            word-wrap: break-word; 
+    overflow-wrap: break-word;
+    white-space: normal;
+    min-width: 0; 
         }
 
         h2 {
@@ -96,4 +99,4 @@ class NoteItem extends HTMLElement {
   }
 }
 
-customElements.define('note-item', NoteItem);
+customElements.define("note-item", NoteItem);

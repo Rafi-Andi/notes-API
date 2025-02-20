@@ -1,5 +1,5 @@
 const API_BASE = "https://notes-api.dicoding.dev/v2";
-import { notesData } from "../data/data.js";
+import { customValidationUsernameHandler } from '../validasiForm.js';
 
 const getNotes = async () => {
   try {
@@ -16,31 +16,28 @@ const getNotes = async () => {
   }
 };
 
-
 const insertNote = async (note) => {
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(note)
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(note),
+  };
 
+  try {
+    const ress = await fetch(`${API_BASE}/notes`, options);
+    const data = await ress.json();
+
+    if (data.error) {
+      console.error(data.error);
+    } else {
+      getNotes();
     }
-
-    try {
-        const ress = await fetch(`${API_BASE}/notes`, options)
-        const data = await ress.json()
-
-        if(data.error){
-            console.error(data.error)
-        } else {
-            getNotes()
-        }
-    } catch(err) {
-        console.log(err)
-    }
-}
-
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const generateObjek = (id, title, body, archived, createdAt) => {
   return {
@@ -87,7 +84,45 @@ document.addEventListener("DOMContentLoaded", () => {
       body: inputBody,
     };
 
-    insertNote(noteInput)
+    insertNote(noteInput);
+  });
+
+  titleInput.addEventListener("change", customValidationUsernameHandler);
+  titleInput.addEventListener("invalid", customValidationUsernameHandler);
+
+  titleInput.addEventListener("blur", (event) => {
+    const isValid = event.target.validity.valid;
+    const errorMessage = event.target.validationMessage;
+
+    const connectedValidationId = event.target.getAttribute("aria-describedby");
+    const connectedValidationEl = connectedValidationId
+      ? document.getElementById(connectedValidationId)
+      : null;
+
+    if (connectedValidationEl && errorMessage && !isValid) {
+      connectedValidationEl.innerText = errorMessage;
+    } else {
+      connectedValidationEl.innerText = "";
+    }
+  });
+
+  bodyInput.addEventListener("change", customValidationUsernameHandler);
+  bodyInput.addEventListener("invalid", customValidationUsernameHandler);
+
+  bodyInput.addEventListener("blur", (event) => {
+    const isValid = event.target.validity.valid;
+    const errorMessage = event.target.validationMessage;
+
+    const connectedValidationId = event.target.getAttribute("aria-describedby");
+    const connectedValidationEl = connectedValidationId
+      ? document.getElementById(connectedValidationId)
+      : null;
+
+    if (connectedValidationEl && errorMessage && !isValid) {
+      connectedValidationEl.innerText = errorMessage;
+    } else {
+      connectedValidationEl.innerText = "";
+    }
   });
 });
 
