@@ -73,6 +73,12 @@ class NoteItem extends HTMLElement {
             display: flex;
             gap: 1rem;
         }
+        .button-container {
+          display: flex;
+          gap: .5rem;
+          margin-top: 10px;
+          justify-content: center;
+        }
         `;
   }
 
@@ -86,7 +92,7 @@ class NoteItem extends HTMLElement {
 
     this._shadowRoot.appendChild(this._style);
 
-    this.setAttribute("id-note", this._note.id);
+    this.setAttribute("id", this._note.id);
 
     this._shadowRoot.innerHTML = `
     ${this._style.outerHTML}
@@ -94,6 +100,10 @@ class NoteItem extends HTMLElement {
                 <p>${this._note.createdAt} | ${this._note.body.length} Character</p> 
                 <div class="container-isi">
                     <p>${this._note.body}</p>
+                </div>
+                <div class="button-container">
+                    <button-archive></button-archive>
+                    <button-delete></button-delete>
                 </div>
         `;
   }

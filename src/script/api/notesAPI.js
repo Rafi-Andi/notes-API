@@ -1,7 +1,7 @@
-const API_BASE = "https://notes-api.dicoding.dev/v2";
+export const API_BASE = "https://notes-api.dicoding.dev/v2";
 import { customValidationUsernameHandler } from '../validasiForm.js';
 
-const getNotes = async () => {
+export const getNotes = async () => {
   try {
     const ress = await fetch(`${API_BASE}/notes`);
     const data = await ress.json();
@@ -39,7 +39,41 @@ const insertNote = async (note) => {
   }
 };
 
-const generateObjek = (id, title, body, archived, createdAt) => {
+export const archiveNotes =  async (id) => {
+  const options = {
+    method: "POST", 
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  try {
+    const ress = await fetch(`${API_BASE}/notes/${id}/archive`, options);
+    const data = ress.json()
+
+    console.log(data.message)
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+export const deleteNotes = async (id) => {
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  try {
+    const ress = await fetch(`${API_BASE}/notes/${id}`, options)
+    const data = ress.json()
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+export const generateObjek = (id, title, body, archived, createdAt) => {
   return {
     id: id,
     title: title,
@@ -85,6 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     insertNote(noteInput);
+
+    form.reset()
   });
 
   titleInput.addEventListener("change", customValidationUsernameHandler);
@@ -125,17 +161,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-function generateId() {
-  const prefix = "notes";
-  const randomStr = Math.random().toString(36).substring(2, 8);
-  const randomNum = Math.floor(100000 + Math.random() * 900000);
-
-  return `${prefix}-${randomStr}-${randomNum}`;
-}
-
-function getTimestamp() {
-  return new Date().toISOString();
-}
 
 getNotes();

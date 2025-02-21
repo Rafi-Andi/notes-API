@@ -27,7 +27,7 @@ class Header extends HTMLElement {
                 right: 0;
                 background-color: rgb(70, 66, 60, 0.2);
                 backdrop-filter: blur(5px);
-                z-index: 999px;
+                z-index: 99999px;
            }
 
            .container {

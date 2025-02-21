@@ -5,9 +5,10 @@ class Button extends HTMLElement {
         super()
 
         this._shadowRoot = this.attachShadow({mode: 'open'})
-        this._color = this.getAttribute('color')
+        this._color = this.getAttribute('color') || 'blueviolet'
         this._borderRadius = this.getAttribute('borderRadius')
         this._href = this.getAttribute('href') || '#'
+        this._hover = this.getAttribute('hover')
         this._style = document.createElement('style')
     }
 
@@ -19,7 +20,7 @@ class Button extends HTMLElement {
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
     .container {
       margin: auto;
-      background-color: blueviolet;
+      background-color: ${this._color};
       width: fit-content;
       padding: 10px 20px;
       border-radius: ${this._borderRadius}px;
@@ -34,7 +35,7 @@ class Button extends HTMLElement {
     }
 
     .container:hover {
-      background-color: rgb(120, 33, 201);;
+      background-color: ${this._hover};
     }        
     `
     }
