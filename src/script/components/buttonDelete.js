@@ -10,18 +10,16 @@ class ButtonDelete extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.addEventListener('click', async (e) => {
-        const noteItem = this.getRootNode().host
-        
-        console.log('noteItem:', noteItem) 
-        
-        const noteId = noteItem.getAttribute('id');
-        console.log(noteId)
+    this.addEventListener("click", async (e) => {
+      const noteItem = this.getRootNode().host;
 
-        await deleteNotes(noteId)
-        
-        location.reload()        
-    })
+      console.log("noteItem:", noteItem);
+
+      const noteId = noteItem.getAttribute("id");
+      console.log(noteId);
+
+      await deleteNotes(noteId);
+    });
   }
 
   emptyContent() {
@@ -65,10 +63,8 @@ class ButtonDelete extends HTMLElement {
         <div class="container"> 
             <button><slot>Delete</slot></button>
         </div>
-    `
-    ;
+    `;
   }
 }
 
-
-customElements.define('button-delete', ButtonDelete);
+customElements.define("button-delete", ButtonDelete);

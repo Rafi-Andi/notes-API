@@ -1,10 +1,10 @@
 import { notesData } from "./data.js";
-import { customValidationUsernameHandler } from '../validasiForm.js';
+import { customValidationUsernameHandler } from "../validasiForm.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("form");
-    const titleInput = form.elements['title'];
-    const bodyInput = form.elements['isi'];
+  const form = document.querySelector("form");
+  const titleInput = form.elements["title"];
+  const bodyInput = form.elements["isi"];
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function generateId() {
     const prefix = "notes";
-    const randomStr = Math.random().toString(36).substring(2, 8); 
+    const randomStr = Math.random().toString(36).substring(2, 8);
     const randomNum = Math.floor(100000 + Math.random() * 900000);
 
     return `${prefix}-${randomStr}-${randomNum}`;

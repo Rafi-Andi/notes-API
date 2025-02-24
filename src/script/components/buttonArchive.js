@@ -10,18 +10,16 @@ class ButtonArchive extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.addEventListener('click', async (e) => {
-        const noteItem = this.getRootNode().host
-        
-        console.log('noteItem:', noteItem) 
-        
-        const noteId = noteItem.getAttribute('id');
-        console.log(noteId)
+    this.addEventListener("click", async (e) => {
+      const noteItem = this.getRootNode().host;
 
-        await archiveNotes(noteId)
-        
-        window.location.href = '/archived.html' 
-    })
+      console.log("noteItem:", noteItem);
+
+      const noteId = noteItem.getAttribute("id");
+      console.log(noteId);
+
+      await archiveNotes(noteId);
+    });
   }
 
   emptyContent() {
@@ -65,10 +63,8 @@ class ButtonArchive extends HTMLElement {
         <div class="container"> 
             <button><slot>Archive</slot></button>
         </div>
-    `
-    ;
+    `;
   }
 }
 
-
-customElements.define('button-archive', ButtonArchive);
+customElements.define("button-archive", ButtonArchive);

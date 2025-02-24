@@ -1,23 +1,23 @@
 class NotesList extends HTMLElement {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this._NotesData = [];
-        this._style = document.createElement('style')
-        this._shadowRoot = this.attachShadow({mode: 'open'})
-    }
+    this._NotesData = [];
+    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+  }
 
-    connectedCallback() {
-        this.render()
-    }
+  connectedCallback() {
+    this.render();
+  }
 
-    setNotesData(values){
-        this._NotesData = values
+  setNotesData(values) {
+    this._NotesData = values;
 
-        this.render()
-    }
-    updateStyle(){
-        this._style.textContent = `
+    this.render();
+  }
+  updateStyle() {
+    this._style.textContent = `
          @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
         :host {
             display: grid;
@@ -36,27 +36,27 @@ class NotesList extends HTMLElement {
                 grid-template-columns: repeat(1, minmax(0, 1fr));
             }
         }
-        ` 
-    }
+        `;
+  }
 
-    emptyContent(){
-        this._shadowRoot.innerHTML = ''
-    }
+  emptyContent() {
+    this._shadowRoot.innerHTML = "";
+  }
 
-    render(){
-        this.updateStyle()
-       
-        const notesList = this._NotesData.map((noteData) => {
-            const note = document.createElement('note-item')
-            note.setNote(noteData)
+  render() {
+    this.updateStyle();
 
-            return note
-        })
+    const notesList = this._NotesData.map((noteData) => {
+      const note = document.createElement("note-item");
+      note.setNote(noteData);
 
-        this.emptyContent()
+      return note;
+    });
 
-        this._shadowRoot.append(this._style, ...notesList)
-    }
+    this.emptyContent();
+
+    this._shadowRoot.append(this._style, ...notesList);
+  }
 }
 
-customElements.define('note-list', NotesList);
+customElements.define("note-list", NotesList);

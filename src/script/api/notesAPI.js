@@ -1,18 +1,26 @@
 export const API_BASE = "https://notes-api.dicoding.dev/v2";
-import { customValidationUsernameHandler } from '../validasiForm.js';
+import { customValidationUsernameHandler } from "../validasiForm.js";
+import { showLoading, hideLoading, sleep } from "../utils/loading.js";
+import { alertSuccess, alertError } from "../utils/alertStatus.js";
+
+const loading = document.querySelector(".loading");
 
 export const getNotes = async () => {
+  showLoading(loading);
+
   try {
     const ress = await fetch(`${API_BASE}/notes`);
+
+    await sleep();
+
     const data = await ress.json();
     console.log(data);
-    if (data.error) {
-      console.error(data.error);
-    } else {
-      renderNotes(data.data);
-    }
+
+    renderNotes(data.data);
   } catch (err) {
     console.log(err);
+  } finally {
+    hideLoading(loading);
   }
 };
 
@@ -29,49 +37,52 @@ const insertNote = async (note) => {
     const ress = await fetch(`${API_BASE}/notes`, options);
     const data = await ress.json();
 
-    if (data.error) {
-      console.error(data.error);
-    } else {
-      getNotes();
-    }
+    await getNotes();
+
+    alertSuccess("berhasil menambahkan catatan");
   } catch (err) {
-    console.log(err);
+    alertError(err);
   }
 };
 
-export const archiveNotes =  async (id) => {
+export const archiveNotes = async (id) => {
   const options = {
-    method: "POST", 
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
-    }
-  }
+    },
+  };
 
   try {
     const ress = await fetch(`${API_BASE}/notes/${id}/archive`, options);
-    const data = ress.json()
+    const data = ress.json();
 
-    console.log(data.message)
-  } catch(err) {
-    console.log(err)
+    await getNotes();
+
+    alertSuccess("Berhasil mengarsipkan catatan");
+  } catch (err) {
+    alertError("Gagal mengarsipkan catatan");
   }
-}
+};
 
 export const deleteNotes = async (id) => {
   const options = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-    }
-  }
+    },
+  };
 
   try {
-    const ress = await fetch(`${API_BASE}/notes/${id}`, options)
-    const data = ress.json()
-  } catch(err) {
-    console.log(err)
+    const ress = await fetch(`${API_BASE}/notes/${id}`, options);
+    const data = ress.json();
+    await getNotes();
+
+    alertSuccess("Berhasil menghapus catatan");
+  } catch (err) {
+    alertError("Gagal menghapus catatan");
   }
-}
+};
 
 export const generateObjek = (id, title, body, archived, createdAt) => {
   return {
@@ -92,7 +103,7 @@ const renderNotes = (notes) => {
       note.title,
       note.body,
       note.archived,
-      note.createdAt
+      note.createdAt,
     );
 
     notesListData.unshift(noteObjek);
@@ -120,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     insertNote(noteInput);
 
-    form.reset()
+    form.reset();
   });
 
   titleInput.addEventListener("change", customValidationUsernameHandler);

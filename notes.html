@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -27,6 +27,11 @@
         border-radius: 10px;
       }
 
+      form {
+        position: relative;
+        z-index: 10;
+      }
+
       h2 {
         transform: translateY(-10px);
         color: #d3d3d3;
@@ -53,6 +58,7 @@
 
       main {
         padding: 100px 20px;
+        position: relative;
       }
 
       .validation-message {
@@ -60,7 +66,6 @@
         font-weight: 600;
         margin-top: 20px;
       }
-
     </style>
   </head>
   <body>
@@ -77,11 +82,7 @@
         minlength="3"
         aria-describedby="titleInput"
       />
-      <p
-        id="titleInput"
-        class="validation-message"
-        aria-live="polite"
-      ></p>
+      <p id="titleInput" class="validation-message" aria-live="polite"></p>
       <div class="container-isi">
         <textarea
           name="isi"
@@ -92,22 +93,23 @@
           aria-describedby="contentBodyInput"
         ></textarea>
         <p
-        id="contentBodyInput"
-        class="validation-message"
-        aria-live="polite"
-      ></p>
+          id="contentBodyInput"
+          class="validation-message"
+          aria-live="polite"
+        ></p>
       </div>
       <button type="submit">Add</button>
     </form>
 
     <main>
-      <note-list> </note-list>
+      <note-list></note-list>
 
+      <div class="container-loading">
+        <div class="loading"></div>
+      </div>
 
       <div class="container-button">
-        <div
-          id="toggleForm"
-        >
+        <div id="toggleForm">
           <button-custom borderRadius="50"
             ><i data-feather="plus"></i
           ></button-custom>

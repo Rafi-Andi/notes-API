@@ -1,11 +1,10 @@
 class Header extends HTMLElement {
-
-  static observedAttributes = ['aktif']
+  static observedAttributes = ["aktif"];
   constructor() {
     super();
 
-    this._aktif = this.getAttribute('aktif') || 'notes';
-    
+    this._aktif = this.getAttribute("aktif") || "notes";
+
     this._shadowRoot = this.attachShadow({ mode: "open" });
     this._style = document.createElement("style");
   }
@@ -27,7 +26,7 @@ class Header extends HTMLElement {
                 right: 0;
                 background-color: rgb(70, 66, 60, 0.2);
                 backdrop-filter: blur(5px);
-                z-index: 99999px;
+                z-index: 30;
            }
 
            .container {
@@ -83,10 +82,10 @@ class Header extends HTMLElement {
         `;
   }
 
-  attributeChangedCallback(name, old, newValue){
-      this[`._${name}`] = newValue;
+  attributeChangedCallback(name, old, newValue) {
+    this[`._${name}`] = newValue;
 
-      this.render()
+    this.render();
   }
 }
 
