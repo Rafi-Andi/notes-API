@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Document</title><script src="https://unpkg.com/feather-icons"></script><style>.container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        background-color: #545252;
+        padding: 10px;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .container-isi {
+        background-color: #373737;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      form {
+        position: relative;
+        z-index: 10;
+      }
+
+      h2 {
+        transform: translateY(-10px);
+        color: #d3d3d3;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #373737;
+      }
+
+      p {
+        margin-top: 10px;
+        color: #adabab;
+      }
+
+      .keterangan {
+        display: flex;
+        gap: 1rem;
+        color: #d3d3d3;
+      }
+      .container-img {
+        border-radius: 50px;
+        background-color: black;
+        width: fit-content;
+        padding: 8px;
+      }
+
+      main {
+        padding: 100px 20px;
+        position: relative;
+      }
+
+      .validation-message {
+        color: red;
+        font-weight: 600;
+        margin-top: 20px;
+      }</style><script defer="defer" src="bundle.js"></script></head><body><header-custom aktif="notes"></header-custom><form action="notes.html" class="form"><input type="title" name="title" id="title" placeholder="input title" required maxlength="20" minlength="3" aria-describedby="titleInput"/><p id="titleInput" class="validation-message" aria-live="polite"></p><div class="container-isi"><textarea name="isi" id="isi" placeholder="Input Notes" required minlength="6" aria-describedby="contentBodyInput"></textarea><p id="contentBodyInput" class="validation-message" aria-live="polite"></p></div><button type="submit">Add</button></form><main><note-list></note-list><div class="container-loading"><div class="loading"></div></div><div class="container-button"><div id="toggleForm"><button-custom borderradius="50"><i data-feather="plus"></i></button-custom></div></div></main><script>feather.replace();</script></body></html>
