@@ -1,23 +1,23 @@
 class ArchiveList extends HTMLElement {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this._archiveData = [];
-        this._style = document.createElement('style')
-        this._shadowRoot = this.attachShadow({mode: 'open'})
-    }
+    this._archiveData = [];
+    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+  }
 
-    connectedCallback() {
-        this.render()
-    }
+  connectedCallback() {
+    this.render();
+  }
 
-    setArchiveData(values){
-        this._archiveData = values
+  setArchiveData(values) {
+    this._archiveData = values;
 
-        this.render()
-    }
-    updateStyle(){
-        this._style.textContent = `
+    this.render();
+  }
+  updateStyle() {
+    this._style.textContent = `
          @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
         :host {
             display: grid;
@@ -36,27 +36,27 @@ class ArchiveList extends HTMLElement {
                 grid-template-columns: repeat(1, minmax(0, 1fr));
             }
         }
-        ` 
-    }
+        `;
+  }
 
-    emptyContent(){
-        this._shadowRoot.innerHTML = ''
-    }
+  emptyContent() {
+    this._shadowRoot.innerHTML = "";
+  }
 
-    render(){
-        this.updateStyle()
-        
-        const archiveList = this._archiveData.map((archiveData) => {
-            const archive = document.createElement('archive-item')
-            archive.setArchive(archiveData)
+  render() {
+    this.updateStyle();
 
-            return archive
-        })
+    const archiveList = this._archiveData.map((archiveData) => {
+      const archive = document.createElement("archive-item");
+      archive.setArchive(archiveData);
 
-        this.emptyContent()
+      return archive;
+    });
 
-        this._shadowRoot.append(this._style, ...archiveList)
-    }
+    this.emptyContent();
+
+    this._shadowRoot.append(this._style, ...archiveList);
+  }
 }
 
-customElements.define('archive-list', ArchiveList);
+customElements.define("archive-list", ArchiveList);

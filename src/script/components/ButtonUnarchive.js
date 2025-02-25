@@ -10,18 +10,16 @@ class ButtonUnarchive extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.addEventListener('click', async (e) => {
-        const noteItem = this.getRootNode().host
-        
-        console.log('noteItem:', noteItem) 
-        
-        const noteId = noteItem.getAttribute('id');
-        console.log(noteId)
+    this.addEventListener("click", async (e) => {
+      const noteItem = this.getRootNode().host;
 
-        await unarchiveNotes(noteId)
-        
-        window.location.href = '/notes.html' 
-    })
+      console.log("noteItem:", noteItem);
+
+      const noteId = noteItem.getAttribute("id");
+      console.log(noteId);
+
+      await unarchiveNotes(noteId);
+    });
   }
 
   emptyContent() {
@@ -39,6 +37,7 @@ class ButtonUnarchive extends HTMLElement {
       border-radius: 10px;
       transition: all .5s;
       font-family: roboto, sans-serif
+      cursor: pointer;
       
     }
 
@@ -47,10 +46,12 @@ class ButtonUnarchive extends HTMLElement {
       outline: none;
       border: none;
       color: white;
+      cursor: pointer;
     }
 
     .container:hover {
       background-color: lightgreen;
+      cursor: pointer;
     }`;
   }
 
@@ -65,10 +66,8 @@ class ButtonUnarchive extends HTMLElement {
         <div class="container"> 
             <button><slot>Unarchive</slot></button>
         </div>
-    `
-    ;
+    `;
   }
 }
 
-
-customElements.define('button-unarchive', ButtonUnarchive);
+customElements.define("button-unarchive", ButtonUnarchive);

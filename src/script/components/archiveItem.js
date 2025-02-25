@@ -1,36 +1,36 @@
 class ArchiveItem extends HTMLElement {
-    constructor() {
-      super();
-  
-      this._shadowRoot = this.attachShadow({ mode: "open" });
-  
-      this._style = document.createElement("style");
-  
-      this._note = {
-        id: "id-data",
-        title: "title-data",
-        body: "body-data",
-        createdAt: "createdAt-data",
-        archived: false,
-      };
-    }
-  
-    connectedCallback() {
-      this.render();
-    }
-  
-    setArchive(values) {
-      this._note["id"] = values.id;
-      this._note["title"] = values.title;
-      this._note["body"] = values.body;
-      this._note["createdAt"] = values.createdAt;
-      this._note["archived"] = values.archived;
-  
-      this.render();
-    }
-  
-    updateStyle() {
-      this._style.textContent = `
+  constructor() {
+    super();
+
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+
+    this._style = document.createElement("style");
+
+    this._note = {
+      id: "id-data",
+      title: "title-data",
+      body: "body-data",
+      createdAt: "createdAt-data",
+      archived: false,
+    };
+  }
+
+  connectedCallback() {
+    this.render();
+  }
+
+  setArchive(values) {
+    this._note["id"] = values.id;
+    this._note["title"] = values.title;
+    this._note["body"] = values.body;
+    this._note["createdAt"] = values.createdAt;
+    this._note["archived"] = values.archived;
+
+    this.render();
+  }
+
+  updateStyle() {
+    this._style.textContent = `
           :host {
               display: flex;
               flex-direction: column;
@@ -80,21 +80,21 @@ class ArchiveItem extends HTMLElement {
             justify-content: center;
           }
           `;
-    }
-  
-    emptyContent() {
-      this._shadowRoot.innerHTML = "";
-    }
-  
-    render() {
-        this.updateStyle();
-        this.emptyContent();
-  
-      this._shadowRoot.appendChild(this._style);
-  
-      this.setAttribute("id", this._note.id);
-  
-      this._shadowRoot.innerHTML = `
+  }
+
+  emptyContent() {
+    this._shadowRoot.innerHTML = "";
+  }
+
+  render() {
+    this.updateStyle();
+    this.emptyContent();
+
+    this._shadowRoot.appendChild(this._style);
+
+    this.setAttribute("id", this._note.id);
+
+    this._shadowRoot.innerHTML = `
       ${this._style.outerHTML}
                   <h2>${this._note.title}</h2>
                   <p>${this._note.createdAt} | ${this._note.body.length} Character</p> 
@@ -105,8 +105,7 @@ class ArchiveItem extends HTMLElement {
                       <button-unarchive></button-unarchive>
                   </div>
           `;
-    }
   }
-  
-  customElements.define("archive-item", ArchiveItem);
-  
+}
+
+customElements.define("archive-item", ArchiveItem);

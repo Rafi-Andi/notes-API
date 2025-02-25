@@ -10,18 +10,16 @@ class ButtonDelete extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.addEventListener('click', async (e) => {
-        const noteItem = this.getRootNode().host
-        
-        console.log('noteItem:', noteItem) 
-        
-        const noteId = noteItem.getAttribute('id');
-        console.log(noteId)
+    this.addEventListener("click", async (e) => {
+      const noteItem = this.getRootNode().host;
 
-        await deleteNotes(noteId)
-        
-        location.reload()        
-    })
+      console.log("noteItem:", noteItem);
+
+      const noteId = noteItem.getAttribute("id");
+      console.log(noteId);
+
+      await deleteNotes(noteId);
+    });
   }
 
   emptyContent() {
@@ -39,7 +37,7 @@ class ButtonDelete extends HTMLElement {
       border-radius: 10px;
       transition: all .5s;
       font-family: roboto, sans-serif
-      
+      cursor: pointer;
     }
 
     .container button {
@@ -47,10 +45,12 @@ class ButtonDelete extends HTMLElement {
       outline: none;
       border: none;
       color: white;
+      cursor: pointer;
     }
 
     .container:hover {
       background-color: lightred;
+      cursor: pointer;
     }`;
   }
 
@@ -65,10 +65,8 @@ class ButtonDelete extends HTMLElement {
         <div class="container"> 
             <button><slot>Delete</slot></button>
         </div>
-    `
-    ;
+    `;
   }
 }
 
-
-customElements.define('button-delete', ButtonDelete);
+customElements.define("button-delete", ButtonDelete);

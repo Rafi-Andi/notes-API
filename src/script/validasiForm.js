@@ -15,6 +15,4 @@ export const customValidationUsernameHandler = (event) => {
     event.target.setCustomValidity("Minimal panjang adalah 6 karakter.");
     return;
   }
-
-  
 };
